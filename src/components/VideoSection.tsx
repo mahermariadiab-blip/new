@@ -60,12 +60,12 @@ export function VideoSection({
   }, [onCameraReady]);
 
   return (
-    <div className="relative w-full h-full bg-gray-900">
-      <div className="absolute inset-0">
+    <div className="video-section">
+      <div className="video-overlay">
         {agentVideoUrl ? (
           <video
             src={agentVideoUrl}
-            className="w-full h-full object-cover"
+            className="video-element"
             autoPlay
             muted
           />
@@ -73,7 +73,7 @@ export function VideoSection({
           <>
             <video
               ref={agentVideoRef}
-              className={`w-full h-full object-cover ${cameraAvailable ? 'block' : 'hidden'}`}
+              className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'}`}
               autoPlay
               muted
               playsInline
@@ -82,19 +82,19 @@ export function VideoSection({
               <img
                 src="https://images.pexels.com/photos/7551659/pexels-photo-7551659.jpeg?auto=compress&cs=tinysrgb&w=1920"
                 alt="Agent video feed"
-                className="w-full h-full object-cover"
+                className="video-element"
               />
             )}
           </>
         )}
       </div>
 
-      <div className="absolute top-6 right-6 flex flex-col gap-4">
-        <div className="w-48 h-36 bg-white rounded-lg shadow-lg overflow-hidden border-4 border-white">
+      <div className="video-thumbnails">
+        <div className="video-thumbnail">
           {customerVideoUrl ? (
             <video
               src={customerVideoUrl}
-              className="w-full h-full object-cover"
+              className="video-element"
               autoPlay
               muted
             />
@@ -102,16 +102,16 @@ export function VideoSection({
             <img
               src="https://images.pexels.com/photos/3762800/pexels-photo-3762800.jpeg?auto=compress&cs=tinysrgb&w=400"
               alt="Customer video feed"
-              className="w-full h-full object-cover"
+              className="video-element"
             />
           )}
         </div>
 
-        <div className="w-48 h-36 bg-white rounded-lg shadow-lg overflow-hidden border-4 border-red-600">
+        <div className="video-thumbnail avatar">
           {avatarVideoUrl ? (
             <video
               src={avatarVideoUrl}
-              className="w-full h-full object-cover"
+              className="video-element"
               autoPlay
               muted
             />
@@ -119,7 +119,7 @@ export function VideoSection({
             <img
               src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400"
               alt="Avatar video feed"
-              className="w-full h-full object-cover"
+              className="video-element"
             />
           )}
         </div>

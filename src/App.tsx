@@ -57,30 +57,29 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gray-900">
+    <div className="app-container">
       <Navigation />
 
-      <div className="flex-1 relative flex flex-col">
-        <div className="flex-1 relative">
+      <div className="flex-container">
+        <div className="flex-item">
           <VideoSection showCamera={true} />
         </div>
 
-        <div className="bg-gradient-to-t from-black/80 to-black/40 px-6 py-8 overflow-y-auto max-h-1/2">
-          <div className="container mx-auto space-y-6">
+        <div className="chat-container">
+          <div className="chat-inner">
             <WelcomeMessage />
 
             {messages.length > 0 && (
-              <div className="space-y-3 max-w-4xl mx-auto">
+              <div className="messages-container">
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`${
-                      message.isResponse
-                        ? 'bg-red-600'
-                        : 'bg-blue-600'
-                    } text-white px-6 py-4 rounded-2xl shadow-lg`}
+                    className={`${message.isResponse
+                        ? 'message message-response'
+                        : 'message message-user'
+                      }`}
                   >
-                    <p className="text-base font-semibold">{message.text}</p>
+                    <p>{message.text}</p>
                   </div>
                 ))}
               </div>
