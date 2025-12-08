@@ -4,6 +4,8 @@ import { VideoSection } from './components/VideoSection';
 import { WelcomeMessage } from './components/WelcomeMessage';
 import { ActionButtons } from './components/ActionButtons';
 import { OnScreenKeyboard } from './components/OnScreenKeyboard';
+import { LoadingSpinner } from './components/LoadingSpinner';
+import { generateAIResponse } from './services/mockApi';
 
 interface Message {
   id: string;
@@ -11,28 +13,16 @@ interface Message {
   isResponse: boolean;
 }
 
-const RESPONSE_MESSAGES = [
-  'Vielen Dank für Ihre Anfrage. Wie kann ich Ihnen heute helfen?',
-  'Gerne unterstütze ich Sie bei Ihrer Reisebuchung.',
-  'Ich schaue das für Sie nach. Einen Moment bitte.',
-  'Haben Sie bereits eine bestimmte Route im Auge?',
-  'Können Sie mir mehr Details zu Ihrer Reise geben?',
-  'Die beste Verbindung würde ich für Sie recherchieren.',
-  'Welcher Termin passt Ihnen am besten?',
-  'Sehr gerne helfe ich Ihnen weiter.',
-  'Wie kann ich Sie noch unterstützen?',
-  'Das ist eine gute Wahl. Möchten Sie noch etwas buchen?',
-];
+
 
 function App() {
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isGeneratingResponse, setIsGeneratingResponse] = useState(false);
 
-  const getRandomResponse = (): string => {
-    return RESPONSE_MESSAGES[Math.floor(Math.random() * RESPONSE_MESSAGES.length)];
-  };
 
-  const handleTextSubmit = (text: string) => {
+
+  const handleTextSubmit = async (text: string) => {
     if (text.trim()) {
       const userMessageId = `user-${Date.now()}`;
       setMessages((prev) => [
@@ -40,16 +30,32 @@ function App() {
         { id: userMessageId, text, isResponse: false },
       ]);
 
-      setTimeout(() => {
-        const responseText = getRandomResponse();
+      setShowKeyboard(false);
+      setIsGeneratingResponse(true);
+
+      try {
+        // Use the mock API to generate a response
+        const responseText = await generateAIResponse(text);
         const responseId = `response-${Date.now()}`;
+
         setMessages((prev) => [
           ...prev,
           { id: responseId, text: responseText, isResponse: true },
         ]);
-      }, 500);
+      } catch (error) {
+        console.error('Error generating response:', error);
+        // Fallback to a default response in case of error
+        const fallbackResponse = 'Entschuldigung, es gab einen Fehler. Bitte versuchen Sie es erneut.';
+        const responseId = `response-${Date.now()}`;
+
+        setMessages((prev) => [
+          ...prev,
+          { id: responseId, text: fallbackResponse, isResponse: true },
+        ]);
+      } finally {
+        setIsGeneratingResponse(false);
+      }
     }
-    setShowKeyboard(false);
   };
 
   const handleStartSignLanguage = () => {
@@ -75,13 +81,17 @@ function App() {
                   <div
                     key={message.id}
                     className={`${message.isResponse
-                        ? 'message message-response'
-                        : 'message message-user'
+                      ? 'message message-response'
+                      : 'message message-user'
                       }`}
                   >
                     <p>{message.text}</p>
                   </div>
                 ))}
+
+                {isGeneratingResponse && (
+                  <LoadingSpinner />
+                )}
               </div>
             )}
 
