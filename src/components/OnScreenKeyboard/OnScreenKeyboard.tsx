@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector, keyboardActions, uiActions } from '../../store';
 import { X } from 'lucide-react';
 import './OnScreenKeyboard.scss'
 
@@ -8,7 +8,8 @@ interface OnScreenKeyboardProps {
 }
 
 export function OnScreenKeyboard({ onClose, onTextSubmit }: OnScreenKeyboardProps) {
-  const [text, setText] = useState('');
+  const dispatch = useAppDispatch();
+  const text = useAppSelector((state) => state.keyboard.text);
 
   const keys = [
     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
@@ -18,20 +19,22 @@ export function OnScreenKeyboard({ onClose, onTextSubmit }: OnScreenKeyboardProp
   ];
 
   const handleKeyPress = (key: string) => {
-    setText((prev) => prev + key);
+    dispatch(keyboardActions.appendKey(key));
   };
 
   const handleBackspace = () => {
-    setText((prev) => prev.slice(0, -1));
+    dispatch(keyboardActions.backspace());
   };
 
   const handleSpace = () => {
-    setText((prev) => prev + ' ');
+    dispatch(keyboardActions.addSpace());
   };
 
   const handleSubmit = () => {
     onTextSubmit(text);
-    setText('');
+    dispatch(keyboardActions.clearText());
+    // close keyboard after submit
+    dispatch(uiActions.setShowKeyboard(false));
   };
 
   return (

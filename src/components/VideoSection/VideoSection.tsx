@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector, videoActions } from '../../store';
 import './VideoSection.scss'
 
 interface VideoSectionProps {
@@ -14,10 +15,11 @@ export function VideoSection({
   customerVideoUrl,
   avatarVideoUrl,
   onCameraReady,
-  showCamera = true,
 }: VideoSectionProps) {
   const agentVideoRef = useRef<HTMLVideoElement>(null);
-  const [cameraAvailable, setCameraAvailable] = useState(false);
+  const dispatch = useAppDispatch();
+  const cameraAvailable = useAppSelector((state) => state.video.cameraAvailable);
+  const showCamera = useAppSelector((state) => state.ui.showCamera);
 
   useEffect(() => {
     let stream: MediaStream | null = null;
@@ -32,7 +34,7 @@ export function VideoSection({
 
         if (isMounted && agentVideoRef.current) {
           agentVideoRef.current.srcObject = stream;
-          setCameraAvailable(true);
+          dispatch(videoActions.setCameraAvailable(true));
 
           if (onCameraReady) {
             onCameraReady(stream);
@@ -41,7 +43,7 @@ export function VideoSection({
       } catch (error) {
         if (isMounted) {
           console.error('Error accessing camera:', error);
-          setCameraAvailable(false);
+          dispatch(videoActions.setCameraAvailable(false));
         }
       }
     };
@@ -54,7 +56,7 @@ export function VideoSection({
         stream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [onCameraReady]);
+  }, [onCameraReady, dispatch]);
 
   return (
     <div className="video-section">

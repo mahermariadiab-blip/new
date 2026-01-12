@@ -1,4 +1,4 @@
-import { useState } from 'react';
+/* useEffect not needed */
 import { Navigation } from './components/Navigation/Navigation';
 import { VideoSection } from './components/VideoSection/VideoSection';
 import { WelcomeMessage } from './components/WelcomeMessage/WelcomeMessage';
@@ -6,55 +6,36 @@ import { ActionButtons } from './components/ActionButtons/ActionButtons';
 import { OnScreenKeyboard } from './components/OnScreenKeyboard/OnScreenKeyboard';
 import { LoadingSpinner } from './components/LoadingSpinner/LoadingSpinner';
 import { generateAIResponse } from './services/mockApi';
-
-interface Message {
-  id: string;
-  text: string;
-  isResponse: boolean;
-}
-
-
+import { useAppDispatch, useAppSelector } from './store';
+import { uiActions, messagesActions } from './store';
 
 function App() {
-  const [showKeyboard, setShowKeyboard] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isGeneratingResponse, setIsGeneratingResponse] = useState(false);
+  const dispatch = useAppDispatch();
+  const showKeyboard = useAppSelector((state) => state.ui.showKeyboard);
+  const messages = useAppSelector((state) => state.messages);
+  const isGeneratingResponse = useAppSelector((state) => state.ui.isGeneratingResponse);
 
 
 
   const handleTextSubmit = async (text: string) => {
-    if (text.trim()) {
-      const userMessageId = `user-${Date.now()}`;
-      setMessages((prev) => [
-        ...prev,
-        { id: userMessageId, text, isResponse: false },
-      ]);
+    if (!text.trim()) return;
+    const userMessageId = `user-${Date.now()}`;
+    dispatch(messagesActions.addMessage({ id: userMessageId, text, isResponse: false }));
 
-      setShowKeyboard(false);
-      setIsGeneratingResponse(true);
+    dispatch(uiActions.setShowKeyboard(false));
+    dispatch(uiActions.setIsGeneratingResponse(true));
 
-      try {
-        // Use the mock API to generate a response
-        const responseText = await generateAIResponse(text);
-        const responseId = `response-${Date.now()}`;
-
-        setMessages((prev) => [
-          ...prev,
-          { id: responseId, text: responseText, isResponse: true },
-        ]);
-      } catch (error) {
-        console.error('Error generating response:', error);
-        // Fallback to a default response in case of error
-        const fallbackResponse = 'Entschuldigung, es gab einen Fehler. Bitte versuchen Sie es erneut.';
-        const responseId = `response-${Date.now()}`;
-
-        setMessages((prev) => [
-          ...prev,
-          { id: responseId, text: fallbackResponse, isResponse: true },
-        ]);
-      } finally {
-        setIsGeneratingResponse(false);
-      }
+    try {
+      const responseText = await generateAIResponse(text);
+      const responseId = `response-${Date.now()}`;
+      dispatch(messagesActions.addMessage({ id: responseId, text: responseText, isResponse: true }));
+    } catch (error) {
+      console.error('Error generating response:', error);
+      const fallbackResponse = 'Entschuldigung, es gab einen Fehler. Bitte versuchen Sie es erneut.';
+      const responseId = `response-${Date.now()}`;
+      dispatch(messagesActions.addMessage({ id: responseId, text: fallbackResponse, isResponse: true }));
+    } finally {
+      dispatch(uiActions.setIsGeneratingResponse(false));
     }
   };
 
@@ -68,7 +49,7 @@ function App() {
 
       <div className="flex-container">
         <div className="flex-item">
-          <VideoSection showCamera={true} />
+          <VideoSection />
         </div>
 
         <div className="chat-container">
@@ -96,7 +77,7 @@ function App() {
             )}
 
             <ActionButtons
-              onTextInputClick={() => setShowKeyboard(true)}
+              onTextInputClick={() => dispatch(uiActions.setShowKeyboard(true))}
               onSignLanguageClick={handleStartSignLanguage}
             />
           </div>
@@ -105,7 +86,7 @@ function App() {
 
       {showKeyboard && (
         <OnScreenKeyboard
-          onClose={() => setShowKeyboard(false)}
+          onClose={() => dispatch(uiActions.setShowKeyboard(false))}
           onTextSubmit={handleTextSubmit}
         />
       )}
