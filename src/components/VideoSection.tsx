@@ -16,9 +16,7 @@ export function VideoSection({
   showCamera = true,
 }: VideoSectionProps) {
   const agentVideoRef = useRef<HTMLVideoElement>(null);
-  const customerVideoRef = useRef<HTMLVideoElement>(null);
   const [cameraAvailable, setCameraAvailable] = useState(false);
-  const [cameraInitialized, setCameraInitialized] = useState(false);
 
   useEffect(() => {
     let stream: MediaStream | null = null;
@@ -34,7 +32,6 @@ export function VideoSection({
         if (isMounted && agentVideoRef.current) {
           agentVideoRef.current.srcObject = stream;
           setCameraAvailable(true);
-          setCameraInitialized(true);
 
           if (onCameraReady) {
             onCameraReady(stream);
@@ -44,7 +41,6 @@ export function VideoSection({
         if (isMounted) {
           console.error('Error accessing camera:', error);
           setCameraAvailable(false);
-          setCameraInitialized(true);
         }
       }
     };
@@ -71,13 +67,15 @@ export function VideoSection({
           />
         ) : (
           <>
-            <video
-              ref={agentVideoRef}
-              className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'}`}
-              autoPlay
-              muted
-              playsInline
-            />
+            {showCamera && (
+              <video
+                ref={agentVideoRef}
+                className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'}`}
+                autoPlay
+                muted
+                playsInline
+              />
+            )}
             {!cameraAvailable && (
               <img
                 src="https://images.pexels.com/photos/7551659/pexels-photo-7551659.jpeg?auto=compress&cs=tinysrgb&w=1920"
