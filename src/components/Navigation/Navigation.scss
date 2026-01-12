@@ -1,0 +1,46 @@
+@import "../../index";
+
+.navbar {
+  background-color: $white;
+  border-bottom: 1px solid $gray-200;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  background-color: $primary-red;
+  color: $white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-button {
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $gray-100;
+  }
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: $gray-600;
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import './OnScreenKeyboard.scss'
 
 interface OnScreenKeyboardProps {
   onClose: () => void;

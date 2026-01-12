@@ -1,0 +1,150 @@
+@import "../../index";
+
+.keyboard-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($black, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.keyboard-container {
+  background-color: $white;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 64rem;
+  padding: 1.5rem;
+}
+
+.keyboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.keyboard-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $gray-800;
+}
+
+.close-button {
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $gray-100;
+  }
+}
+
+.text-display-container {
+  margin-bottom: 1.5rem;
+}
+
+.text-display {
+  background-color: $gray-100;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 5rem;
+  font-size: 1.25rem;
+  color: $gray-800;
+  word-break: break-words;
+}
+
+.text-placeholder {
+  color: $gray-400;
+}
+
+.keyboard-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.key-button {
+  background-color: $gray-200;
+  color: $gray-800;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  min-width: 3.125rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $gray-300;
+  }
+
+  &:active {
+    background-color: $gray-400;
+  }
+}
+
+.keyboard-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-button-small {
+  background-color: $gray-300;
+  color: $gray-800;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $gray-400;
+  }
+
+  &:active {
+    background-color: $gray-500;
+  }
+}
+
+.action-button-space {
+  background-color: $gray-300;
+  color: $gray-800;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  flex: 1;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $gray-400;
+  }
+
+  &:active {
+    background-color: $gray-500;
+  }
+}
+
+.action-button-primary {
+  background-color: $primary-red;
+  color: $white;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: darken($primary-red, 10%);
+  }
+
+  &:active {
+    background-color: darken($primary-red, 20%);
+  }
+}

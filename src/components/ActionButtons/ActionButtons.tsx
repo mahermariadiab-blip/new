@@ -1,4 +1,5 @@
 import { Keyboard, Hand } from 'lucide-react';
+import './ActionButtons.scss'
 
 interface ActionButtonsProps {
   onTextInputClick: () => void;

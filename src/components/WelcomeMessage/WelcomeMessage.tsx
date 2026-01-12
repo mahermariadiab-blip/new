@@ -1,3 +1,6 @@
+import './WelcomeMessage.scss'
+
+
 export function WelcomeMessage() {
   return (
     <div className="welcome-container">

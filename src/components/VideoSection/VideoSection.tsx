@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import './VideoSection.scss'
 
 interface VideoSectionProps {
   agentVideoUrl?: string;

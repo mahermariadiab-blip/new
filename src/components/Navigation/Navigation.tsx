@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight, Home, Globe } from 'lucide-react';
+import './Navigation.scss'
 
 export function Navigation() {
   return (

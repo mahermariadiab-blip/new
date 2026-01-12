@@ -1,3 +1,5 @@
+import './LoadingSpinner.scss'
+
 interface LoadingSpinnerProps {
     size?: 'small' | 'medium' | 'large';
     color?: 'red' | 'blue' | 'gray';
