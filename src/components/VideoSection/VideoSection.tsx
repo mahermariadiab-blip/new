@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector, videoActions } from '../../store';
+import Agent from '../../assets/images/Agent.png';
+import Avatar from '../../assets/images/Avatar.png';
 import './VideoSection.scss';
 
 interface VideoSectionProps {
@@ -16,7 +18,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   avatarVideoUrl,
   onCameraReady,
 }) => {
-  const agentVideoRef = useRef<HTMLVideoElement>(null);
+  const customerVideoRef = useRef<HTMLVideoElement>(null);
   const dispatch = useAppDispatch();
   const cameraAvailable = useAppSelector((state) => state.video.cameraAvailable);
   const showCamera = useAppSelector((state) => state.ui.showCamera);
@@ -32,8 +34,8 @@ const VideoSection: React.FC<VideoSectionProps> = ({
           audio: false,
         });
 
-        if (isMounted && agentVideoRef.current) {
-          agentVideoRef.current.srcObject = stream;
+        if (isMounted && customerVideoRef.current) {
+          customerVideoRef.current.srcObject = stream;
           dispatch(videoActions.setCameraAvailable(true));
 
           if (onCameraReady) {
@@ -69,41 +71,28 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             muted
           />
         ) : (
-          <>
-            {showCamera && (
-              <video
-                ref={agentVideoRef}
-                className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'
-                  }`}
-                autoPlay
-                muted
-                playsInline
-              />
-            )}
-
-            {!cameraAvailable && (
-              <img
-                src="https://images.pexels.com/photos/7551659/pexels-photo-7551659.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                alt="Agent video feed"
-                className="video-element"
-              />
-            )}
-          </>
+          <img
+            src={Agent}
+            alt="Agent video feed"
+            className="video-element"
+          />
         )}
       </div>
 
       <div className="video-thumbnails">
         <div className="video-thumbnail">
-          {customerVideoUrl ? (
+          {showCamera ? (
             <video
               src={customerVideoUrl}
-              className="video-element"
+              className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'
+                }`}
+              ref={customerVideoRef}
               autoPlay
               muted
             />
           ) : (
             <img
-              src="https://images.pexels.com/photos/3762800/pexels-photo-3762800.jpeg?auto=compress&cs=tinysrgb&w=400"
+              src={""}
               alt="Customer video feed"
               className="video-element"
             />
@@ -120,7 +109,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             />
           ) : (
             <img
-              src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400"
+              src={Avatar}
               alt="Avatar video feed"
               className="video-element"
             />
