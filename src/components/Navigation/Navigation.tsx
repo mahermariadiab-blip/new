@@ -1,12 +1,13 @@
 import { ArrowLeft, ArrowRight, Home, Globe } from 'lucide-react';
+import DeutscheBahnIcon from '../../assets/icons/DeutscheBahnIcon.svg';
 import './Navigation.scss'
 
 export function Navigation() {
   return (
     <nav className="navbar">
       <div className="nav-left">
-        <div className="logo">
-          DB
+        <div className="logo-container">
+          <img className="logo" src={DeutscheBahnIcon} alt="Deutsche Bahn" />
         </div>
       </div>
 
