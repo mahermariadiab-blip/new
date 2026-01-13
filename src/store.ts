@@ -9,6 +9,8 @@ const uiSlice = createSlice({
     showKeyboard: false,
     isGeneratingResponse: false,
     showCamera: true,
+    // ID of the message currently being edited (null if none)
+    editingMessageId: null as string | null,
   },
   reducers: {
     setShowKeyboard(state, action: PayloadAction<boolean>) {
@@ -19,6 +21,10 @@ const uiSlice = createSlice({
     },
     setShowCamera(state, action: PayloadAction<boolean>) {
       state.showCamera = action.payload;
+    },
+    // Set the ID of the message that is being edited
+    setEditingMessageId(state, action: PayloadAction<string | null>) {
+      state.editingMessageId = action.payload;
     },
   },
 });
@@ -37,6 +43,15 @@ const messagesSlice = createSlice({
   reducers: {
     addMessage(state, action: PayloadAction<Message>) {
       state.push(action.payload);
+    },
+    // Edit an existing message and truncate any following messages
+    editMessage(state, action: PayloadAction<{ id: string; text: string }>) {
+      const index = state.findIndex((msg) => msg.id === action.payload.id);
+      if (index !== -1) {
+        state[index].text = action.payload.text;
+        // Remove all messages after the edited one (both user and AI responses)
+        state.splice(index + 1);
+      }
     },
     clearMessages() {
       return [] as Message[];

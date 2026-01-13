@@ -7,20 +7,30 @@ import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 import Navigation from './components/navigation/Navigation';
 import { generateAIResponse } from './services/mockApi';
 import { useAppDispatch, useAppSelector } from './store';
-import { uiActions, messagesActions } from './store';
+import { uiActions, messagesActions, keyboardActions } from './store';
+import { Edit } from 'lucide-react';
+import IconButton from './components/ui/IconButton/IconButton';
 
 function App() {
   const dispatch = useAppDispatch();
   const showKeyboard = useAppSelector((state) => state.ui.showKeyboard);
   const messages = useAppSelector((state) => state.messages);
   const isGeneratingResponse = useAppSelector((state) => state.ui.isGeneratingResponse);
+  // Get the id of the message currently being edited (if any)
+  const editingId = useAppSelector((state) => state.ui.editingMessageId);
 
 
 
   const handleTextSubmit = async (text: string) => {
     if (!text.trim()) return;
-    const userMessageId = `user-${Date.now()}`;
-    dispatch(messagesActions.addMessage({ id: userMessageId, text, isResponse: false }));
+
+    if (editingId) {
+      dispatch(messagesActions.editMessage({ id: editingId, text }));
+      dispatch(uiActions.setEditingMessageId(null));
+    } else {
+      const userMessageId = `user-${Date.now()}`;
+      dispatch(messagesActions.addMessage({ id: userMessageId, text, isResponse: false }));
+    }
 
     dispatch(uiActions.setShowKeyboard(false));
     dispatch(uiActions.setIsGeneratingResponse(true));
@@ -59,14 +69,28 @@ function App() {
             {messages.length > 0 && (
               <div className="messages-container">
                 {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`${message.isResponse
-                      ? 'message message-response'
-                      : 'message message-user'
-                      }`}
-                  >
-                    <p>{message.text}</p>
+                  <div className="message-user-container">
+                    {!message.isResponse && (
+                      <IconButton
+                        icon={Edit}
+                        ariaLabel="Edit message"
+                        onClick={() => {
+                          dispatch(uiActions.setEditingMessageId(message.id));
+                          dispatch(keyboardActions.setText(message.text));
+                          dispatch(uiActions.setShowKeyboard(true));
+                        }}
+                        className="edit-button"
+                      />
+                    )}
+                    <div
+                      key={message.id}
+                      className={`${message.isResponse
+                        ? 'message message-response'
+                        : 'message message-user'
+                        }`}
+                    >
+                      <p>{message.text}</p>
+                    </div>
                   </div>
                 ))}
 
