@@ -1,8 +1,10 @@
 import React from 'react';
-import { ArrowLeft, ArrowRight, Home, Globe } from 'lucide-react';
 import { DeutscheBahnIcon } from '../../assets/icons/DeutscheBahnIcon';
 import { HomeIcon } from '../../assets/icons/HomeIcon';
-import IconButton from '../ui/IconButton';
+import { LanguageIcon } from '../../assets/icons/LanguageIcon';
+import { ArrowLeftIcon } from '../../assets/icons/ArrowLeftIcon';
+import { ArrowRightIcon } from '../../assets/icons/ArrowRightIcon';
+import IconButton from '../ui/IconButton/IconButton';
 import './Navigation.scss';
 
 const Navigation: React.FC = () => {
@@ -10,27 +12,16 @@ const Navigation: React.FC = () => {
     <nav className="navbar">
       <div className="nav-left">
         <div className="logo-container">
-          <DeutscheBahnIcon />
+          <DeutscheBahnIcon className="nav-db-icon" />
         </div>
       </div>
-
+      <div className="nav-center">
+        <IconButton icon={ArrowLeftIcon} ariaLabel="ArrowLeft" />
+        <IconButton icon={ArrowRightIcon} ariaLabel="ArrowRight" />
+      </div>
       <div className="nav-right">
-        <button className="nav-button">
-          <ArrowLeft className="icon" />
-        </button>
-
-        <button className="nav-button">
-          <ArrowRight className="icon" />
-          <IconButton icon={HomeIcon} ariaLabel="Home" />
-        </button>
-
-        <button className="nav-button">
-          <Home className="icon" />
-        </button>
-
-        <button className="nav-button">
-          <Globe className="icon" />
-        </button>
+        <IconButton icon={HomeIcon} ariaLabel="Home" />
+        <IconButton icon={LanguageIcon} ariaLabel="Language" />
       </div>
     </nav>
   );

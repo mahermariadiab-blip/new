@@ -22,7 +22,16 @@
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+.nav-db-icon {
+  width: 5.3rem;
+  height: 3.75rem;
+}
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-button {

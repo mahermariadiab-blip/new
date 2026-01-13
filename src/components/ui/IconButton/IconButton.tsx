@@ -1,4 +1,5 @@
 import React from "react";
+import './IconButton.scss';
 
 type SvgIcon = React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -7,7 +8,6 @@ interface IconButtonProps {
     onClick?: () => void;
     disabled?: boolean;
     ariaLabel: string;
-    size?: number;
     className?: string;
 }
 
@@ -16,7 +16,6 @@ const IconButton: React.FC<IconButtonProps> = ({
     onClick,
     disabled = false,
     ariaLabel,
-    size = 20,
     className = "",
 }) => {
     return (
@@ -27,7 +26,7 @@ const IconButton: React.FC<IconButtonProps> = ({
             disabled={disabled}
             className={`icon-button ${className}`}
         >
-            <Icon width={size} height={size} />
+            <Icon />
         </button>
     );
 };
