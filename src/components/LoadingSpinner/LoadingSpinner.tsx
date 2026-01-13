@@ -1,4 +1,5 @@
-import './LoadingSpinner.scss'
+import React from 'react';
+import './LoadingSpinner.scss';
 
 interface LoadingSpinnerProps {
     size?: 'small' | 'medium' | 'large';
@@ -7,7 +8,12 @@ interface LoadingSpinnerProps {
     text?: string;
 }
 
-export function LoadingSpinner({ size = 'medium', color = 'red', showText = true, text = 'Schreibt...' }: LoadingSpinnerProps) {
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+    size = 'medium',
+    color = 'red',
+    showText = true,
+    text = 'Schreibt...',
+}) => {
     return (
         <div className="spinner-container typing">
             <div className={`loading-spinner ${size} ${color}`}>
@@ -23,15 +29,18 @@ export function LoadingSpinner({ size = 'medium', color = 'red', showText = true
                         r="10"
                         stroke="currentColor"
                         strokeWidth="4"
-                    ></circle>
+                    />
                     <path
                         className="opacity-75"
                         fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
+                    />
                 </svg>
             </div>
+
             {showText && <span className="spinner-text">{text}</span>}
         </div>
     );
-}
+};
+
+export default LoadingSpinner;

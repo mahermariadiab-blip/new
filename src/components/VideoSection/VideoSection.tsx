@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector, videoActions } from '../../store';
-import './VideoSection.scss'
+import './VideoSection.scss';
 
 interface VideoSectionProps {
   agentVideoUrl?: string;
@@ -10,12 +10,12 @@ interface VideoSectionProps {
   showCamera?: boolean;
 }
 
-export function VideoSection({
+const VideoSection: React.FC<VideoSectionProps> = ({
   agentVideoUrl,
   customerVideoUrl,
   avatarVideoUrl,
   onCameraReady,
-}: VideoSectionProps) {
+}) => {
   const agentVideoRef = useRef<HTMLVideoElement>(null);
   const dispatch = useAppDispatch();
   const cameraAvailable = useAppSelector((state) => state.video.cameraAvailable);
@@ -73,12 +73,14 @@ export function VideoSection({
             {showCamera && (
               <video
                 ref={agentVideoRef}
-                className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'}`}
+                className={`video-element ${cameraAvailable ? 'video-visible' : 'video-hidden'
+                  }`}
                 autoPlay
                 muted
                 playsInline
               />
             )}
+
             {!cameraAvailable && (
               <img
                 src="https://images.pexels.com/photos/7551659/pexels-photo-7551659.jpeg?auto=compress&cs=tinysrgb&w=1920"
@@ -127,4 +129,6 @@ export function VideoSection({
       </div>
     </div>
   );
-}
+};
+
+export default VideoSection;

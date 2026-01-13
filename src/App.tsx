@@ -1,10 +1,10 @@
 /* useEffect not needed */
-import { Navigation } from './components/Navigation/Navigation';
-import { VideoSection } from './components/VideoSection/VideoSection';
-import { WelcomeMessage } from './components/WelcomeMessage/WelcomeMessage';
-import { ActionButtons } from './components/ActionButtons/ActionButtons';
-import { OnScreenKeyboard } from './components/OnScreenKeyboard/OnScreenKeyboard';
-import { LoadingSpinner } from './components/LoadingSpinner/LoadingSpinner';
+import VideoSection from './components/videoSection/VideoSection';
+import WelcomeMessage from './components/welcomeMessage/WelcomeMessage';
+import ActionButtons from './components/actionButtons/ActionButtons';
+import OnScreenKeyboard from './components/onScreenKeyboard/OnScreenKeyboard';
+import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
+import Navigation from './components/navigation/Navigation';
 import { generateAIResponse } from './services/mockApi';
 import { useAppDispatch, useAppSelector } from './store';
 import { uiActions, messagesActions } from './store';

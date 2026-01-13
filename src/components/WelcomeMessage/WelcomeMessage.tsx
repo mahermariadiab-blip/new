@@ -1,7 +1,7 @@
-import './WelcomeMessage.scss'
+import React from 'react';
+import './WelcomeMessage.scss';
 
-
-export function WelcomeMessage() {
+const WelcomeMessage: React.FC = () => {
   return (
     <div className="welcome-container">
       <div className="welcome-message">
@@ -11,7 +11,9 @@ export function WelcomeMessage() {
           Wählen Sie entsprechend aus.
         </p>
       </div>
-      <div className="welcome-arrow"></div>
+      <div className="welcome-arrow" />
     </div>
   );
-}
+};
+
+export default WelcomeMessage;

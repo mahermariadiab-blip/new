@@ -1,13 +1,16 @@
+import React from 'react';
 import { ArrowLeft, ArrowRight, Home, Globe } from 'lucide-react';
-import DeutscheBahnIcon from '../../assets/icons/DeutscheBahnIcon.svg';
-import './Navigation.scss'
+import { DeutscheBahnIcon } from '../../assets/icons/DeutscheBahnIcon';
+import { HomeIcon } from '../../assets/icons/HomeIcon';
+import IconButton from '../ui/IconButton';
+import './Navigation.scss';
 
-export function Navigation() {
+const Navigation: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="nav-left">
         <div className="logo-container">
-          <img className="logo" src={DeutscheBahnIcon} alt="Deutsche Bahn" />
+          <DeutscheBahnIcon />
         </div>
       </div>
 
@@ -15,16 +18,22 @@ export function Navigation() {
         <button className="nav-button">
           <ArrowLeft className="icon" />
         </button>
+
         <button className="nav-button">
           <ArrowRight className="icon" />
+          <IconButton icon={HomeIcon} ariaLabel="Home" />
         </button>
+
         <button className="nav-button">
           <Home className="icon" />
         </button>
+
         <button className="nav-button">
           <Globe className="icon" />
         </button>
       </div>
     </nav>
   );
-}
+};
+
+export default Navigation;

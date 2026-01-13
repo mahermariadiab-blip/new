@@ -1,13 +1,17 @@
+import React from 'react';
 import { useAppDispatch, useAppSelector, keyboardActions, uiActions } from '../../store';
 import { X } from 'lucide-react';
-import './OnScreenKeyboard.scss'
+import './OnScreenKeyboard.scss';
 
 interface OnScreenKeyboardProps {
   onClose: () => void;
   onTextSubmit: (text: string) => void;
 }
 
-export function OnScreenKeyboard({ onClose, onTextSubmit }: OnScreenKeyboardProps) {
+const OnScreenKeyboard: React.FC<OnScreenKeyboardProps> = ({
+  onClose,
+  onTextSubmit,
+}) => {
   const dispatch = useAppDispatch();
   const text = useAppSelector((state) => state.keyboard.text);
 
@@ -52,7 +56,11 @@ export function OnScreenKeyboard({ onClose, onTextSubmit }: OnScreenKeyboardProp
 
         <div className="text-display-container">
           <div className="text-display">
-            {text || <span className="text-placeholder">Geben Sie Ihre Nachricht ein...</span>}
+            {text || (
+              <span className="text-placeholder">
+                Geben Sie Ihre Nachricht ein...
+              </span>
+            )}
           </div>
         </div>
 
@@ -95,4 +103,6 @@ export function OnScreenKeyboard({ onClose, onTextSubmit }: OnScreenKeyboardProp
       </div>
     </div>
   );
-}
+};
+
+export default OnScreenKeyboard;

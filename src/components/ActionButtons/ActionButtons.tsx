@@ -1,15 +1,16 @@
+import React from 'react';
 import { Keyboard, Hand } from 'lucide-react';
-import './ActionButtons.scss'
+import './ActionButtons.scss';
 
 interface ActionButtonsProps {
   onTextInputClick: () => void;
   onSignLanguageClick: () => void;
 }
 
-export function ActionButtons({
+const ActionButtons: React.FC<ActionButtonsProps> = ({
   onTextInputClick,
   onSignLanguageClick,
-}: ActionButtonsProps) {
+}) => {
   return (
     <div className="actions-container">
       <button
@@ -29,4 +30,6 @@ export function ActionButtons({
       </button>
     </div>
   );
-}
+};
+
+export default ActionButtons;
