@@ -1,7 +1,8 @@
-@import "../../Style";
+@use "../../Style" as *;
 
 .welcome-container {
   position: relative;
+  padding: 0 2.5rem 0 2.5rem;
 }
 
 .welcome-message {
@@ -11,7 +12,6 @@
   padding: 1.5rem 2rem;
   border-radius: 1rem;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  max-width: 90%;
   margin: 0 auto;
 }
 

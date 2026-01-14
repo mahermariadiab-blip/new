@@ -1,4 +1,5 @@
-@import "../../Style";
+@use "../../Style" as *;
+@use "sass:color";
 
 .keyboard-modal {
   position: fixed;
@@ -141,10 +142,10 @@
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: darken($primary-red, 10%);
+    background-color: color.adjust($primary-red, $lightness: -10%);
   }
 
   &:active {
-    background-color: darken($primary-red, 20%);
+    background-color: color.adjust($primary-red, $lightness: -20%);
   }
 }

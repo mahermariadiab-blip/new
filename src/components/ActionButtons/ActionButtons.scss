@@ -1,4 +1,4 @@
-@import "../../Style";
+@use "../../Style" as *;
 
 .actions-container {
   display: flex;

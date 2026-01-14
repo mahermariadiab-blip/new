@@ -1,4 +1,4 @@
-@import "../../Style";
+@use "../../Style" as *;
 
 .navbar {
   background-color: $white;

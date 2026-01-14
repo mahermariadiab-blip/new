@@ -8,8 +8,9 @@ import Navigation from './components/navigation/Navigation';
 import { generateAIResponse } from './services/mockApi';
 import { useAppDispatch, useAppSelector } from './store';
 import { uiActions, messagesActions, keyboardActions } from './store';
-import { Edit } from 'lucide-react';
 import IconButton from './components/ui/IconButton/IconButton';
+import { KeyboardIcon } from './assets/icons/KeyboardIcon';
+import './index.scss';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -69,21 +70,23 @@ function App() {
             {messages.length > 0 && (
               <div className="messages-container">
                 {messages.map((message) => (
-                  <div className="message-user-container">
-                    {!message.isResponse && (
-                      <IconButton
-                        icon={Edit}
-                        ariaLabel="Edit message"
-                        onClick={() => {
-                          dispatch(uiActions.setEditingMessageId(message.id));
-                          dispatch(keyboardActions.setText(message.text));
-                          dispatch(uiActions.setShowKeyboard(true));
-                        }}
-                        className="edit-button"
-                      />
-                    )}
+                  <div className="message-user-container" key={`message-user-container-${message.id}`}>
+                    <div className="edit-button-container">
+                      {!message.isResponse && (
+                        <IconButton
+                          icon={KeyboardIcon}
+                          ariaLabel="Edit message"
+                          onClick={() => {
+                            dispatch(uiActions.setEditingMessageId(message.id));
+                            dispatch(keyboardActions.setText(message.text));
+                            dispatch(uiActions.setShowKeyboard(true));
+                          }}
+                          className="edit-button"
+                        />
+                      )}
+                    </div>
                     <div
-                      key={message.id}
+                      key={`message-${message.id}`}
                       className={`${message.isResponse
                         ? 'message message-response'
                         : 'message message-user'
@@ -93,10 +96,11 @@ function App() {
                     </div>
                   </div>
                 ))}
-
-                {isGeneratingResponse && (
-                  <LoadingSpinner />
-                )}
+                <div className="messages-container">
+                  {isGeneratingResponse && (
+                    <LoadingSpinner />
+                  )}
+                </div>
               </div>
             )}
 

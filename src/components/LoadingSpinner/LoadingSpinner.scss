@@ -1,4 +1,4 @@
-@import "../../Style";
+@use "../../Style" as *;
 
 .loading-spinner {
   display: inline-flex;
