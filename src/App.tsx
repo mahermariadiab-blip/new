@@ -17,7 +17,6 @@ function App() {
   const showKeyboard = useAppSelector((state) => state.ui.showKeyboard);
   const messages = useAppSelector((state) => state.messages);
   const isGeneratingResponse = useAppSelector((state) => state.ui.isGeneratingResponse);
-  // Get the id of the message currently being edited (if any)
   const editingId = useAppSelector((state) => state.ui.editingMessageId);
 
 

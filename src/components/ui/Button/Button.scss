@@ -1,0 +1,40 @@
+@use "../../../Style.scss" as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1rem;
+  border-radius: 0.25rem;
+  font-size: $font-size-14;
+  font-weight: $font-weight-500;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  border: 1px solid transparent;
+  gap: 0.5rem;
+}
+
+.primary {
+  background-color: $white;
+  color: #202530;
+  border-color: #e0e0e0;
+}
+
+.primary:hover {
+  background-color: #f5f5f5;
+}
+
+.secondary {
+  background-color: transparent;
+  color: $white;
+  border-color: #2c3341;
+}
+
+.secondary:hover {
+  background-color: #2c3341;
+}
+
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+}

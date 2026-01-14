@@ -2,14 +2,10 @@
 export const generateAIResponse = async (
   userMessage: string
 ): Promise<string> => {
-  // Add delay to simulate API call - increased for better visibility
   await new Promise(
     (resolve) => setTimeout(resolve, 3000) // 3 seconds minimum
   );
-
-  // More sophisticated mock that could analyze the user message
   const message = userMessage.toLowerCase();
-
   if (message.includes("zug") || message.includes("verbindung")) {
     return "Ich prüfe gerne die aktuellen Zugverbindungen für Sie. Von welchem Bahnhof möchten Sie fahren?";
   } else if (message.includes("ticket") || message.includes("karte")) {

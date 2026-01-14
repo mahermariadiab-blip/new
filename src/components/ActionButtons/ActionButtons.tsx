@@ -1,6 +1,8 @@
 import React from 'react';
-import { Keyboard, Hand } from 'lucide-react';
 import './ActionButtons.scss';
+import Button from '../ui/Button/Button';
+import { KeyboardIcon } from '../../assets/icons/KeyboardIcon';
+import { SignIcon } from '../../assets/icons/SignIcon';
 
 interface ActionButtonsProps {
   onTextInputClick: () => void;
@@ -13,21 +15,18 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 }) => {
   return (
     <div className="actions-container">
-      <button
+      <Button
+        text="Texteingabe"
         onClick={onTextInputClick}
-        className="action-button"
-      >
-        <Keyboard className="button-icon" />
-        <span className="button-text">Texteingabe</span>
-      </button>
-
-      <button
+        icon={<KeyboardIcon className="text-input-icon" />}
+        variant="secondary"
+      />
+      <Button
+        text="Gebärde starten"
         onClick={onSignLanguageClick}
-        className="action-button"
-      >
-        <Hand className="button-icon" />
-        <span className="button-text">Gebärde starten</span>
-      </button>
+        icon={<SignIcon className="text-input-icon" />}
+        variant="primary"
+      />
     </div>
   );
 };
