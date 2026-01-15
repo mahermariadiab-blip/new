@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
             className={`button ${variant} ${className}`}
         >
             {icon && <div className="button-icon">{icon}</div>}
-            {text}
+            <div className="button-text">{text}</div>
         </button>
     );
 };

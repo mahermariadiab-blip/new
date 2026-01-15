@@ -2,8 +2,6 @@ import React from 'react';
 import { DeutscheBahnIcon } from '../../assets/icons/DeutscheBahnIcon';
 import { HomeIcon } from '../../assets/icons/HomeIcon';
 import { LanguageIcon } from '../../assets/icons/LanguageIcon';
-import { ArrowLeftIcon } from '../../assets/icons/ArrowLeftIcon';
-import { ArrowRightIcon } from '../../assets/icons/ArrowRightIcon';
 import IconButton from '../ui/IconButton/IconButton';
 import './Navigation.scss';
 
@@ -14,10 +12,6 @@ const Navigation: React.FC = () => {
         <div className="logo-container">
           <DeutscheBahnIcon className="nav-db-icon" />
         </div>
-      </div>
-      <div className="nav-center">
-        <IconButton icon={ArrowLeftIcon} ariaLabel="ArrowLeft" />
-        <IconButton icon={ArrowRightIcon} ariaLabel="ArrowRight" />
       </div>
       <div className="nav-right">
         <IconButton icon={HomeIcon} ariaLabel="Home" />
