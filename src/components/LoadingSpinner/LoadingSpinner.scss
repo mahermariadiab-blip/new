@@ -38,9 +38,9 @@
 
   &.color {
     border-top-color: $primary-red;
-    border-right-color: rgba(231, 76, 60, 0.2);
-    border-bottom-color: rgba(231, 76, 60, 0.2);
-    border-left-color: rgba(231, 76, 60, 0.2);
+    border-right-color: $border-right-color;
+    border-bottom-color: $border-right-color;
+    border-left-color: $border-right-color;
   }
 }
 

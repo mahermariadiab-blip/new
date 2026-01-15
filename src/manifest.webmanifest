@@ -7,7 +7,7 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/src/assets/images/Avatar.png",
+      "src": "/src/assets/images/Agent.png",
       "sizes": "192x192",
       "type": "image/png"
     },

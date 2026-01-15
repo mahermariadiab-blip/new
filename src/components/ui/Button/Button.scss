@@ -16,12 +16,12 @@
 
 .primary {
   background-color: $white;
-  color: #202530;
-  border-color: #e0e0e0;
+  color: $primary-black;
+  border-color: $white;
 }
 
 .primary:hover {
-  background-color: #f5f5f5;
+  background-color: $primary-button-background;
 }
 
 .secondary {
@@ -31,7 +31,7 @@
 }
 
 .secondary:hover {
-  background-color: #2c3341;
+  background-color: $secondary-button-background;
 }
 
 .button-icon {
