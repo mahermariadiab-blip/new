@@ -1,3 +1,5 @@
+@use "../../../Style.scss" as *;
+
 .icon-button {
   outline: 0 !important;
   border: 0 !important;
@@ -8,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: $white;
   transition: all ease-in-out 0.3s;
   cursor: pointer;
 }
