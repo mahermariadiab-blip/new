@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector, keyboardActions, uiActions } from '../../store';
-import { X } from 'lucide-react';
 import './OnScreenKeyboard.scss';
+import IconButton from '../ui/IconButton/IconButton';
+import { CloseIcon } from '../../assets/icons/CloseIcon';
 
 interface OnScreenKeyboardProps {
   onClose: () => void;
@@ -46,12 +47,11 @@ const OnScreenKeyboard: React.FC<OnScreenKeyboardProps> = ({
       <div className="keyboard-container">
         <div className="keyboard-header">
           <h2 className="keyboard-title">Texteingabe</h2>
-          <button
+          <IconButton
+            icon={CloseIcon}
+            ariaLabel="Edit message"
             onClick={onClose}
-            className="close-button"
-          >
-            <X className="w-6 h-6" />
-          </button>
+          />
         </div>
 
         <div className="text-display-container">
