@@ -3,7 +3,7 @@
 @font-face {
   font-family: "Fira Sans";
   src: url("./assets/fonts/FiraSans/FiraSans-Light.woff2") format("woff2");
-  font-weight: 300;
+  font-weight: $font-weight-300;
   font-style: normal;
   font-display: swap;
 }
@@ -11,7 +11,7 @@
 @font-face {
   font-family: "Fira Sans";
   src: url("./assets/fonts/FiraSans/FiraSans-Regular.woff2") format("woff2");
-  font-weight: 400;
+  font-weight: $font-weight-400;
   font-style: normal;
   font-display: swap;
 }
@@ -19,7 +19,7 @@
 @font-face {
   font-family: "Fira Sans";
   src: url("./assets/fonts/FiraSans/FiraSans-Medium.woff2") format("woff2");
-  font-weight: 500;
+  font-weight: $font-weight-500;
   font-style: normal;
   font-display: swap;
 }
@@ -27,7 +27,7 @@
 @font-face {
   font-family: "Fira Sans";
   src: url("./assets/fonts/FiraSans/FiraSans-SemiBold.woff2") format("woff2");
-  font-weight: 600;
+  font-weight: $font-weight-600;
   font-style: normal;
   font-display: swap;
 }
@@ -35,7 +35,7 @@
 @font-face {
   font-family: "Fira Sans";
   src: url("./assets/fonts/FiraSans/FiraSans-Bold.woff2") format("woff2");
-  font-weight: 700;
+  font-weight: $font-weight-700;
   font-style: normal;
   font-display: swap;
 }
@@ -56,22 +56,22 @@ body {
 }
 
 .flex-container {
-  flex: 1;
   position: relative;
   display: flex;
   flex-direction: column;
+  flex: 0 0 100%;
 }
 
 .flex-item {
-  flex: 1;
   position: relative;
+  flex: 0 0 25rem;
 }
 
 .chat-container {
   background: $primary-black;
   padding: 2rem 1.5rem;
   overflow-y: auto;
-  max-height: 35%;
+  height: 20rem;
 }
 
 .chat-inner {
@@ -93,6 +93,7 @@ body {
   display: flex;
   align-items: flex-start;
   width: 100%;
+  margin-bottom: 0.75rem;
 }
 .edit-button-container {
   align-self: center;
@@ -105,8 +106,8 @@ body {
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   color: $white;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: $font-weight-600;
+  font-size: $font-size-16;
   line-height: 1.5;
 }
 
@@ -115,10 +116,14 @@ body {
   width: 90%;
   max-width: 90%;
   color: $primary-black;
+  font-size: $font-size-18;
+  font-weight: bold;
 }
 
 .message-response {
   background-color: $primary-red;
   width: 90%;
   max-width: 90%;
+  font-size: $font-size-18;
+  font-weight: bold;
 }
