@@ -64,6 +64,8 @@ body {
 
 .flex-item {
   position: fixed;
+  display: flex;
+  flex-direction: column;
   top: 0;
   left: 0;
   width: 100%;

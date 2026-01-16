@@ -55,10 +55,9 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navigation />
-
       <div className="flex-container">
         <div className="flex-item">
+          <Navigation />
           <VideoSection />
         </div>
 
